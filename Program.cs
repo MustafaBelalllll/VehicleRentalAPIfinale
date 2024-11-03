@@ -21,6 +21,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// CORS configuration
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins", policy =>
+    {
+        policy.AllowAnyOrigin()
+         .AllowAnyMethod()
+         .AllowAnyHeader();
+    });
+});
+
+app.UseCors("AllowAllOrigins"); // Itt hívják meg a CORS -t!
+
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
